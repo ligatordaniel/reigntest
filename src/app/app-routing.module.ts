@@ -8,8 +8,8 @@ const routes: Routes = [
 
   { path: 'favorites', loadChildren: () => import('./modules/favorites/pages.module').then(m => m.PagesModule) },
 
-  { path: 'about', loadChildren: () => import('./modules/about/pages.module').then(m => m.PagesModule) }, 
-
+  { path: 'about', loadChildren: () => import('./modules/about/pages.module').then(m => m.PagesModule) },
+  
  ];
 
 @NgModule({
