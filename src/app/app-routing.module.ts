@@ -10,6 +10,8 @@ const routes: Routes = [
 
   { path: 'about', loadChildren: () => import('./modules/about/pages.module').then(m => m.PagesModule) },
   
+  { path: '**', pathMatch: 'full', redirectTo: 'news' }
+  
  ];
 
 @NgModule({

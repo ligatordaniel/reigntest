@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { NewsServiceService } from 'src/app/core/services/api/news-service.service';
 
 @Component({
   selector: 'app-news',
@@ -7,9 +8,41 @@ import { Component, OnInit } from '@angular/core';
 })
 export class NewsComponent implements OnInit {
 
-  constructor() { }
+  public allNews: any[] = [];
+  public loading: boolean = true
 
-  ngOnInit() {
+  constructor(
+    private newsService: NewsServiceService
+  ) { }
+
+  async ngOnInit() {
+    await this.getNews(0, 'angular')
+    console.log(this.allNews)
+  }
+
+  async getNews(page: number, frameWork: string) {
+    try {
+      this.loading = true
+      const res = await this.newsService.getAllNews(page, frameWork)
+      this.allNews = res.hits
+      this.loading = false
+    }
+    catch (error) {
+      console.log(error)
+    }
+  }
+
+  loadAngular(page: number) {
+    this.getNews(page, 'angular')
+  }
+
+  loadReact(page: number) {
+    this.getNews(page, 'reactjs')
+  }
+
+  loadVue(page: number) {
+    this.getNews(page, 'vuejs')
   }
 
 }
+
