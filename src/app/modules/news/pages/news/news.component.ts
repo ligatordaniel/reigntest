@@ -44,5 +44,9 @@ export class NewsComponent implements OnInit {
     this.getNews(page, 'vuejs')
   }
 
+  markAsFavorite(id: string) {
+    console.log(id)
+  }
+
 }
 
