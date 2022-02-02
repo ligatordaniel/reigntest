@@ -17,4 +17,9 @@ export class NewsServiceService {
       .toPromise();
   }
 
+  async getNewsById(id: number): Promise<any> {
+    return await this.http.get(`${this.BASE_URL}items/${id}`)
+      .toPromise();
+  }
+
 }

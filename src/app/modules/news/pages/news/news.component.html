@@ -41,15 +41,15 @@
           <img class="logoTime" src="../../../../../assets/logos/iconWatch.png" alt="iconWatch">
           <span> {{ news.created_at }}</span>
           <p class="mainText">{{news.story_title | slice: 0 : 50 }} 
-            <span *ngIf="news.story_title.length > 50">...</span></p>
+            <!--<span *ngIf="news.story_title.length > 50">...</span>-->  </p>
         </div>
 
         <div class="heartBox">
-          <div class="heart">
-            <img *ngIf="!news.favorite"
-            (click)="markAsFavorite(news.objectID)" src="../../../../../assets/logos/outlineHeart.png" alt="heartLogo">
-            <img *ngIf="news.favorite"
-            (click)="removeFavorite(news.objectID)" src="../../../../../assets/logos/redheart.png" alt="heartLogo">
+          <div class="heart" >
+            <img *ngIf="!news.isFavorite"
+            (click)="markAsFavorite(news)" src="../../../../../assets/logos/outlineHeart.png" alt="heartLogo">
+            <img *ngIf="news.isFavorite"
+            (click)="markAsFavorite(news)" src="../../../../../assets/logos/redheart.png" alt="heartLogo">
          </div>
         </div>
 

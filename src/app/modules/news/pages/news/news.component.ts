@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { NewsServiceService } from 'src/app/core/services/api/news-service.service';
 import { LocalStorageService } from 'src/app/core/services/storageService/local-storage.service';
-import { Router } from '@angular/router';
 
 
 @Component({
@@ -22,7 +21,6 @@ export class NewsComponent implements OnInit {
   async ngOnInit() {
     await this.getNews(0, 'angular')
     console.log(this.allNews)
-    this.setFavorite()
   }
 
   async getNews(page: number, frameWork: string) {
@@ -31,7 +29,7 @@ export class NewsComponent implements OnInit {
       const res = await this.newsService.getAllNews(page, frameWork)
       this.allNews = res.hits
       this.loading = false
-      this.setFavorite()
+      this.setFavorite(this.allNews)
     }
     catch (error) {
       console.log(error)
@@ -50,55 +48,40 @@ export class NewsComponent implements OnInit {
     this.getNews(page, 'vuejs')
   }
 
-
-  async markAsFavorite(id: string) {
-    console.log(id)
-    let favorites = await this.storage.get('favorites')
-    if (favorites) {
-      favorites = JSON.parse(favorites)
-    }
-    else {
+  async markAsFavorite(news: any) {
+    let favorites = await this.storage.get('favorites') 
+    if (!favorites) {
       favorites = []
-    }
-    favorites.push(id)
-    await this.storage.set('favorites', JSON.stringify(favorites))
-    this.setFavorite()
-  }
-
-  async setFavorite() {
-    let favorites = await this.storage.get('favorites')
-    if (favorites) {
-      favorites = JSON.parse(favorites)
-    }
-    else {
-      favorites = []
-    }
-    this.allNews.forEach(news => {
-      if (favorites.includes(news.objectID)) {
-        news.favorite = true
-      }else{
-        news.favorite = false
-      }
-    })
-  }
-
-  async removeFavorite(id: string) {
-    let favorites = await this.storage.get('favorites')
-    if (favorites) {
-      favorites = JSON.parse(favorites)
-    }
-    else {
-      favorites = []
-    }
-    // buscar el indice del id en el array
-    const index = favorites.indexOf(id)
-    if (index > -1) {
-      // eliminar el elemento del array
-      favorites.splice(index, 1)
+      favorites.push(news)
       await this.storage.set('favorites', JSON.stringify(favorites))
-      this.setFavorite()
+      return
     }
+    favorites = JSON.parse(favorites)
+    if (favorites.find(element => element.objectID === news.objectID)) {
+      // eliminar del array con splice si ya esta en favorites
+      favorites.splice(favorites.indexOf(news), 1)
+    }else{
+      favorites.push(news)
+    }
+    await this.storage.set('favorites', JSON.stringify(favorites))
+    this.setFavorite(this.allNews)
   }
+
+  //colorea favoritos
+  async setFavorite(news: any) {
+    let favorites = await this.storage.get('favorites') 
+    let myNews = news
+    // si comparten el mismo id favorites con myNews agrega parametro isFavorite: true sino agrega parametro isFavorite: false
+    if (favorites) {
+      favorites = JSON.parse(favorites)
+      myNews = myNews.map(element => {
+        element.isFavorite = favorites.find(favorite => favorite.objectID === element.objectID) ? true : false
+        return element
+      })
+    }
+    this.allNews = myNews
+  }
+
 
 }
 

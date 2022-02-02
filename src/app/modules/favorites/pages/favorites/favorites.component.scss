@@ -1,0 +1,174 @@
+.AllContainer {
+  background-color: #ffffff;
+  min-height: 100%
+}
+
+
+//dropdown
+.dropDownPosition{
+  margin: 63px 114px 1px 150px;
+}
+
+@media only screen and (max-width: 600px) {
+  .dropDownPosition{
+    margin: 20px 20px 20px 20px;
+  }
+}
+
+.dropbtn {
+  background-color: #fff;
+  color: #343434;
+  font-size: 12px;
+  cursor: pointer;
+  width: 240px;
+  height: 32px;
+  text-align: left;
+  border-radius: 5px;
+  border: solid 1px #2e2e2e;
+}
+
+.svgPosition {
+  float:right
+}
+
+.dropdown {
+  position: relative;
+  display: inline-block;
+  border-radius: 5px;
+  background-color: #fff;
+}
+
+.dropSpan{
+  font-size: 14px;
+  font-weight: normal;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 1.57;
+  letter-spacing: normal;
+  color: #343434;
+  margin-left: 10px;
+}
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #f9f9f9;
+  min-width: 160px;
+  box-shadow: 0px 4px 8px 0px rgba(0,0,0,0.2);
+  z-index: 1;
+  width: 240px;
+}
+
+.dropdown-content a {
+  color: black;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+}
+
+.dropdown-content a:hover {background-color: #f1f1f1}
+
+.dropdown:hover .dropdown-content {
+  display: block;
+}
+
+.dropdown:hover .dropbtn {
+  background-color: #fff;
+}
+
+
+//galery
+.grid-responsive{
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem;
+  padding: 25px 150px;
+} 
+
+
+@media only screen and (max-width: 1000px) {
+  .grid-responsive{
+    grid-template-columns: 1fr;
+    padding: 15px 100px;
+  }
+}
+
+@media only screen and (max-width: 650px) {
+  .grid-responsive{
+    grid-template-columns: 1fr;
+    padding: 15px 15px;
+  }
+}
+
+.gridBox{
+  border-radius: 6px;
+  border: solid 1px #979797;
+}
+
+.gridBox:hover{
+  box-shadow: 2px 2px 5px #999;
+}
+
+.sub-grid{
+  display: grid;
+  grid-template-columns: 85% 15%;
+}
+
+.logoTime{
+  margin-left: 20px;
+}
+
+span{
+  font-size: 11px;
+  font-weight: normal;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: normal;
+  letter-spacing: normal;
+  color: #767676;
+  margin: 20px;
+  margin-left: 2px;
+}
+.mainText{
+  margin: 20px;
+  font-family: Roboto;
+  font-size: 12px;
+  font-weight: 500;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 1.43;
+  letter-spacing: 0.25px;
+  color: #6b6b6b;
+}
+
+.heartBox{
+  background-color: rgb(245,245,245);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 0   10%  10% 0%;
+}
+
+.loadingStyle{
+  position: absolute;
+  top: 50%;
+  left: 47%;
+}
+
+.noFavorites{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 70px;
+  .noFavoritesText{
+    font-family: Roboto;
+    font-size: 16px;
+    font-weight: 500;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: 1.75;
+    letter-spacing: normal;
+    text-align: center;
+    color: #606060;
+    font-weight: 500;
+  }
+}
