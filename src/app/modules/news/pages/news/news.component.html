@@ -1,13 +1,14 @@
-<div class="favoriteContainer">
+<div class="AllContainer">
 
   <div class="optionsContainer">
-    <div class="btnAllFavorite">
+    
+    <div class="btnAllFavorite" (click)="goToFavorites">
       <p class="text">
         All
       </p>
     </div>
   
-    <div class="btnAllFavorite">
+    <div class="btnAllFavorite" (click)="goToFavorites">
       <p class="text">
         My Faves
       </p>
@@ -57,8 +58,11 @@
         </div>
 
         <div class="heartBox">
-          <div class="heart" (click)="markAsFavorite(news.objectID)">
-            <img src="../../../../../assets/logos/outlineHeart.png" alt="heartLogo">
+          <div class="heart">
+            <img *ngIf="!news.favorite"
+            (click)="markAsFavorite(news.objectID)" src="../../../../../assets/logos/outlineHeart.png" alt="heartLogo">
+            <img *ngIf="news.favorite"
+            (click)="removeFavorite(news.objectID)" src="../../../../../assets/logos/redheart.png" alt="heartLogo">
          </div>
         </div>
 
