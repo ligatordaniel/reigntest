@@ -20,7 +20,6 @@ export class NewsComponent implements OnInit {
 
   async ngOnInit() {
     await this.getNews(0, 'angular')
-    console.log(this.allNews)
   }
 
   async getNews(page: number, frameWork: string) {
@@ -32,7 +31,7 @@ export class NewsComponent implements OnInit {
       this.setFavorite(this.allNews)
     }
     catch (error) {
-      console.log(error)
+      console.log('getNews error:', error)
     }
   }
 
@@ -58,7 +57,7 @@ export class NewsComponent implements OnInit {
     }
     favorites = JSON.parse(favorites)
     if (favorites.find(element => element.objectID === news.objectID)) {
-      // eliminar del array con splice si ya esta en favorites
+      //delete if it is already in favorites
       favorites.splice(favorites.indexOf(news), 1)
     }else{
       favorites.push(news)
@@ -67,13 +66,13 @@ export class NewsComponent implements OnInit {
     this.setFavorite(this.allNews)
   }
 
-  //colorea favoritos
+
   async setFavorite(news: any) {
     let favorites = await this.storage.get('favorites') 
     let myNews = news
-    // si comparten el mismo id favorites con myNews agrega parametro isFavorite: true sino agrega parametro isFavorite: false
     if (favorites) {
       favorites = JSON.parse(favorites)
+      //if they shared id set isFavorite to true or false
       myNews = myNews.map(element => {
         element.isFavorite = favorites.find(favorite => favorite.objectID === element.objectID) ? true : false
         return element

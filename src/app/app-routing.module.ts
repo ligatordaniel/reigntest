@@ -10,7 +10,7 @@ const routes: Routes = [
 
   { path: 'favorites', loadChildren: () => import('./modules/favorites/pages.module').then(m => m.PagesModule) }, 
   
-  { path: '**', pathMatch: 'full', redirectTo: 'news' },
+  { path: '**', pathMatch: 'full', redirectTo: 'favorites' },
  ];
 
 @NgModule({
