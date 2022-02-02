@@ -6,12 +6,11 @@ const routes: Routes = [
 
   { path: 'news', loadChildren: () => import('./modules/news/pages.module').then(m => m.PagesModule) }, 
 
-  { path: 'favorites', loadChildren: () => import('./modules/favorites/pages.module').then(m => m.PagesModule) },
-
   { path: 'about', loadChildren: () => import('./modules/about/pages.module').then(m => m.PagesModule) },
+
+  { path: 'favorites', loadChildren: () => import('./modules/favorites/pages.module').then(m => m.PagesModule) }, 
   
-  { path: '**', pathMatch: 'full', redirectTo: 'news' }
-  
+  { path: '**', pathMatch: 'full', redirectTo: 'news' },
  ];
 
 @NgModule({

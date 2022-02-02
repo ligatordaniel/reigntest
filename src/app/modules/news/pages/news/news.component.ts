@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { NewsServiceService } from 'src/app/core/services/api/news-service.service';
 import { LocalStorageService } from 'src/app/core/services/storageService/local-storage.service';
+import { Router } from '@angular/router';
+
 
 @Component({
   selector: 'app-news',
@@ -14,7 +16,7 @@ export class NewsComponent implements OnInit {
 
   constructor(
     private newsService: NewsServiceService,
-    private storage: LocalStorageService
+    private storage: LocalStorageService,
   ) { }
 
   async ngOnInit() {
@@ -47,6 +49,7 @@ export class NewsComponent implements OnInit {
   loadVue(page: number) {
     this.getNews(page, 'vuejs')
   }
+
 
   async markAsFavorite(id: string) {
     console.log(id)
