@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
-import { PagesRoutingModule } from '../news/pages-routing.module';
+import { PagesRoutingModule } from './pages-routing.module';
 import { FavoritesComponent } from './pages/favorites/favorites.component';
 import { SharedModule } from 'src/app/shared/shared.module';
 
