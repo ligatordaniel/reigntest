@@ -27,14 +27,14 @@ export class FavoritesComponent implements OnInit {
     let favorites = await this.storage.get('favorites')
     favorites = JSON.parse(favorites)
     if(favorites.length === 0 || !favorites){
-      this.showMessageNoFavorites = true
       this.loading = false  
+      this.showMessageNoFavorites = true
       return
     }
     if (favorites.length > 0 || favorites) {
-      this.showMessageNoFavorites = false
       this.allFavoriteNews = favorites
       this.loading = false
+      this.showMessageNoFavorites = false
       return
     }
   }

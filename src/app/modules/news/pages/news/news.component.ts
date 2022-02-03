@@ -33,7 +33,7 @@ export class NewsComponent implements OnInit {
       this.loading = false
       this.setFavorite(this.allNews)
       this.setRead(this.allNews)
-      this.parserNewsData(this.allNews)
+      //this.parserNewsData(this.allNews)
     }
     catch (error) {
       console.log('getNews error:', error)
@@ -41,13 +41,17 @@ export class NewsComponent implements OnInit {
     }
   }
 
+  //falta arreglar parseo Dani
   parserNewsData(news: any) {
-    //si un elemento story_title, story_url, created_at. viene vacio elimina el objeto
-    news = news.filter(element => {
-      if (element.story_title && element.story_url && element.created_at) {
-        return element
-      }
+    //eliminar elementos de mi array de objetos
+    news = news.map(element => {
+      delete element.created_at
+      delete element.author
+      delete element.story_title
+      delete element.story_url
+      return element
     })
+    this.allNews = news
   }
 
 
