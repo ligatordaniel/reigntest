@@ -5,6 +5,7 @@ import { PagesRoutingModule } from './pages-routing.module';
 import { NewsComponent } from './pages/news/news.component';
 import { NewsDetailsComponent } from './pages/news-details/news-details.component';
 import { SharedModule } from 'src/app/shared/shared.module';
+import { InfiniteScrollModule } from 'ngx-infinite-scroll';
 
 
 @NgModule({
@@ -16,6 +17,7 @@ import { SharedModule } from 'src/app/shared/shared.module';
     CommonModule,
     PagesRoutingModule,
     SharedModule,
+    InfiniteScrollModule,
   ]
 })
 export class PagesModule { }

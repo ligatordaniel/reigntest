@@ -12,6 +12,9 @@ export class NewsComponent implements OnInit {
 
   public allNews: any[] = [];
   public loading: boolean = true
+  public scrollLoading: boolean = false
+  private actualPage: number = 0
+  
 
   constructor(
     private newsService: NewsServiceService,
@@ -19,7 +22,7 @@ export class NewsComponent implements OnInit {
   ) { }
 
   async ngOnInit() {
-    await this.getNews(0, 'angular')
+    await this.lastFrameworkNews()
   }
 
   async getNews(page: number, frameWork: string) {
@@ -30,22 +33,44 @@ export class NewsComponent implements OnInit {
       this.loading = false
       this.setFavorite(this.allNews)
       this.setRead(this.allNews)
+      this.parserNewsData(this.allNews)
     }
     catch (error) {
       console.log('getNews error:', error)
+      this.loading = false
     }
   }
 
-  loadAngular(page: number) {
+  parserNewsData(news: any) {
+    //si un elemento story_title, story_url, created_at. viene vacio elimina el objeto
+    news = news.filter(element => {
+      if (element.story_title && element.story_url && element.created_at) {
+        return element
+      }
+    })
+  }
+
+
+  async lastFrameworkNews() {
+    const LastFrameWork = await this.storage.get('stateFrameWork')
+    if (!LastFrameWork || 'angular') this.loadAngular(0)
+    if (LastFrameWork === 'reactjs') this.loadReact(0)
+    if (LastFrameWork === 'vuejs') this.loadVue(0)
+  }
+
+  async loadAngular(page: number) {
     this.getNews(page, 'angular')
+    await this.storage.set('stateFrameWork', 'angular')
   }
 
-  loadReact(page: number) {
+  async loadReact(page: number) {
     this.getNews(page, 'reactjs')
+    await this.storage.set('stateFrameWork', 'reactjs')
   }
 
-  loadVue(page: number) {
+  async loadVue(page: number) {
     this.getNews(page, 'vuejs')
+    await this.storage.set('stateFrameWork', 'vuejs')
   }
 
   async markAsFavorite(news: any) {
@@ -103,14 +128,6 @@ export class NewsComponent implements OnInit {
     this.allNews = myNews
   }
 
-
-  goToUrl(news: any) {
-    this.markAsRead(news)
-    console.log('goToUrl:', news.story_url)
-    window.open(news.story_url, '_blank')
-  }
-
-
   async setRead(news: any) {
     let read = await this.storage.get('read')
     let myNews = this.allNews
@@ -123,8 +140,33 @@ export class NewsComponent implements OnInit {
       })
     }
     this.allNews = myNews
-    console.log('setRead:', this.allNews)
   }
 
+  goToUrl(news: any) {
+    this.markAsRead(news)
+    window.open(news.story_url, '_blank')
+  }
+
+  async onScroll() {
+    this.scrollLoading = true
+    const stateFrameWork = await this.storage.get('stateFrameWork')
+    try {
+      const page = this.actualPage ++
+      let res = await this.newsService.getAllNews(page, stateFrameWork)
+      res = res.hits
+      let myNews = this.allNews.concat(res)
+      this.allNews = myNews
+      this.setFavorite(this.allNews)
+      this.setRead(this.allNews)
+      this.loading = false
+      this.scrollLoading = false
+    } catch (error) {
+      console.log('error onScroll:', error)
+      this.loading = false
+      this.scrollLoading = false
+    }
+  }
+
+  
 }
 

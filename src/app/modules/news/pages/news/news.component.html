@@ -1,4 +1,10 @@
-<div class="AllContainer">
+<div class="AllContainer"
+  class="search-results"
+  infiniteScroll
+  [infiniteScrollDistance]="1"
+  [infiniteScrollThrottle]="50"
+  (scrolled)="onScroll()"
+>
 
   <app-options-buttons></app-options-buttons>
 
@@ -60,7 +66,12 @@
 
 
   </div>
- 
+
+
+  <div *ngIf="scrollLoading" class="spinner-border text-info littleSpinner" role="status">
+    <span class="visually-hidden">Loading...</span>
+  </div>
+
 
 </div>
 
