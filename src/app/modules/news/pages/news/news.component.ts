@@ -25,17 +25,18 @@ export class NewsComponent implements OnInit {
     await this.lastFrameworkNews()
   }
 
-  //marcaA: MarcaAnalyticsModel = {};
+
 
   async getNews(page: number, frameWork: string) {
     try {
       this.loading = true
       const res = await this.newsService.getAllNews(page, frameWork)
       this.allNews = res.hits
+      console.log('allNews:', this.allNews)
       this.loading = false
       this.setFavorite(this.allNews)
       this.setRead(this.allNews)
-      //this.parserNewsData(this.allNews)
+      this.parserNewsData(this.allNews)
     }
     catch (error) {
       console.log('getNews error:', error)
@@ -43,17 +44,12 @@ export class NewsComponent implements OnInit {
     }
   }
 
-  //falta arreglar parseo Dani
+  //delete a news 
   parserNewsData(news: any) {
-    //eliminar elementos de mi array de objetos
-    news = news.map(element => {
-      delete element.created_at
-      delete element.author
-      delete element.story_title
-      delete element.story_url
-      return element
+    news = news.filter(element => {
+      return (element.author !== null && element.story_title !== null && element.story_url !== null && element.created_at !== null) 
     })
-    this.allNews = news
+
   }
 
 
@@ -162,6 +158,7 @@ export class NewsComponent implements OnInit {
       res = res.hits
       let myNews = this.allNews.concat(res)
       this.allNews = myNews
+      this.parserNewsData(this.allNews)
       this.setFavorite(this.allNews)
       this.setRead(this.allNews)
       this.loading = false

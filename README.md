@@ -32,11 +32,16 @@ Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app w
 ```sh
   ng serve -o
 ```
-## Development in netlify
+## Development in netlify [productive mode]
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+Create a compilation in a /dist
 ```sh
-  ng serve -o
+  ng build --prod
+```
+
+Deploy in netlify, don't forget to habe dependencies already installed `npm i`
+```sh
+  netlify deploy --prod
 ```
 
 ## Code scaffolding
