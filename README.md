@@ -2,6 +2,8 @@
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 8.3.29.
 
+## Development server
+
 ```sh
   git clone https://github.com/ligatordaniel/reigntest.git
 ```
@@ -12,6 +14,11 @@ install node and nvm using 16.13.2
   nvm use 16.13.2
 ```
 
+install angular cli
+```sh
+  npm install -g angular-cli
+```
+
 install node dependencies
 
 ```sh
@@ -19,16 +26,11 @@ install node dependencies
   npm install
 ```
 
-run project in localhost
+Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
 ```sh
   ng serve -o
 ```
 
-
-
-## Development server
-
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
 
 ## Code scaffolding
 
