@@ -11,7 +11,6 @@ import { LocalStorageService } from 'src/app/core/services/storageService/local-
 export class FavoritesComponent implements OnInit {
 
   public allFavoriteNews: Array<NewsModel> = [];
-  public loading: boolean = true
   public showMessageNoFavorites: boolean = true
 
   constructor(
@@ -26,13 +25,11 @@ export class FavoritesComponent implements OnInit {
     let favorites = await this.storage.get('favorites')
     favorites = JSON.parse(favorites)
     if(favorites.length === 0 || !favorites){
-      this.loading = false  
       this.showMessageNoFavorites = true
       return
     }
     if (favorites.length > 0 || favorites) {
       this.allFavoriteNews = favorites
-      this.loading = false
       this.showMessageNoFavorites = false
       return
     }
