@@ -11,14 +11,8 @@ export class NewsServiceService {
     private http: HttpClient
   ) {}
 
-
   async getAllNews(page: number, frameWork: string): Promise<any> {
     return await this.http.get(`${this.BASE_URL}/search_by_date?query=${frameWork}&page=${page}`)
-      .toPromise();
-  }
-
-  async getNewsById(id: number): Promise<any> {
-    return await this.http.get(`${this.BASE_URL}items/${id}`)
       .toPromise();
   }
 

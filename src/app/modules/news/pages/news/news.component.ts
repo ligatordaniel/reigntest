@@ -29,6 +29,7 @@ export class NewsComponent implements OnInit {
       this.allNews = res.hits
       this.loading = false
       this.setFavorite(this.allNews)
+      this.setRead(this.allNews)
     }
     catch (error) {
       console.log('getNews error:', error)
@@ -64,6 +65,27 @@ export class NewsComponent implements OnInit {
     }
     await this.storage.set('favorites', JSON.stringify(favorites))
     this.setFavorite(this.allNews)
+    this.setRead(this.allNews)
+  }
+
+  async markAsRead(news: any) {
+    let read = await this.storage.get('read')
+    if (!read) {
+      read = []
+      read.push(news)
+      await this.storage.set('read', JSON.stringify(read))
+      return
+    }
+    read = JSON.parse(read)
+    if (read.find(element => element.objectID === news.objectID)) {
+      //delete if it is already in read
+      read.splice(read.indexOf(news), 1)
+    }else{
+      read.push(news)
+    }
+    await this.storage.set('read', JSON.stringify(read))
+    this.setRead(this.allNews)
+    this.setFavorite(this.allNews)
   }
 
 
@@ -81,6 +103,28 @@ export class NewsComponent implements OnInit {
     this.allNews = myNews
   }
 
+
+  goToUrl(news: any) {
+    this.markAsRead(news)
+    console.log('goToUrl:', news.story_url)
+    window.open(news.story_url, '_blank')
+  }
+
+
+  async setRead(news: any) {
+    let read = await this.storage.get('read')
+    let myNews = this.allNews
+    if (read) {
+      read = JSON.parse(read)
+      //if they shared id set isFavorite to true or false
+      myNews = myNews.map(element => {
+        element.isRead = read.find(read => read.objectID === element.objectID) ? true : false
+        return element
+      })
+    }
+    this.allNews = myNews
+    console.log('setRead:', this.allNews)
+  }
 
 }
 

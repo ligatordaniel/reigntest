@@ -50,7 +50,10 @@ export class FavoritesComponent implements OnInit {
 
 
 
-
+  goToUrl(url: string) {
+    console.log('goToUrl:', url)
+    window.open(url, '_blank')
+  }
 
 
 }

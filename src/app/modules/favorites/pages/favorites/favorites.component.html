@@ -16,7 +16,7 @@
     <div class="gridBox" *ngFor="let news of allFavoriteNews">
       <div class="sub-grid">
         
-        <div>
+        <div (click)="goToUrl(news.story_url)">
           <img class="logoTime" src="../../../../../assets/logos/iconWatch.png" alt="iconWatch">
           <span> {{ news.created_at }}</span>
           <p class="mainText">{{news.story_title | slice: 0 : 50 }} 
