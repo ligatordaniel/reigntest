@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { element } from 'protractor';
-import { NewsServiceService } from 'src/app/core/services/api/news-service.service';
+import { NewsModel } from 'src/app/shared/models/news.model';
 import { LocalStorageService } from 'src/app/core/services/storageService/local-storage.service';
 
 
@@ -11,7 +10,7 @@ import { LocalStorageService } from 'src/app/core/services/storageService/local-
 })
 export class FavoritesComponent implements OnInit {
 
-  public allFavoriteNews: any[] = [];
+  public allFavoriteNews: Array<NewsModel> = [];
   public loading: boolean = true
   public showMessageNoFavorites: boolean = true
 
@@ -40,7 +39,7 @@ export class FavoritesComponent implements OnInit {
   }
 
 
-  async deleteFavorite(news: any) {
+  async deleteFavorite(news: NewsModel) {
     let myNews = this.allFavoriteNews
     let index = myNews.findIndex(element => element.objectID === news.objectID)
     myNews.splice(index, 1)
@@ -51,7 +50,6 @@ export class FavoritesComponent implements OnInit {
 
 
   goToUrl(url: string) {
-    console.log('goToUrl:', url)
     window.open(url, '_blank')
   }
 

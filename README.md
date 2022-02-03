@@ -2,6 +2,30 @@
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 8.3.29.
 
+```sh
+  git clone https://github.com/ligatordaniel/reigntest.git
+```
+
+install node and nvm using 16.13.2 
+```sh
+  nvm install 16.13.2 
+  nvm use 16.13.2
+```
+
+install node dependencies
+
+```sh
+  cd reign-daniel-ulloa
+  npm install
+```
+
+run project in localhost
+```sh
+  ng serve -o
+```
+
+
+
 ## Development server
 
 Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.

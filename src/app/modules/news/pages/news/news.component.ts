@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { NewsServiceService } from 'src/app/core/services/api/news-service.service';
 import { LocalStorageService } from 'src/app/core/services/storageService/local-storage.service';
-
+import { NewsModel } from 'src/app/shared/models/news.model';
 
 @Component({
   selector: 'app-news',
@@ -10,7 +10,7 @@ import { LocalStorageService } from 'src/app/core/services/storageService/local-
 })
 export class NewsComponent implements OnInit {
 
-  public allNews: any[] = [];
+  public allNews: Array<NewsModel> = [];
   public loading: boolean = true
   public scrollLoading: boolean = false
   private actualPage: number = 0
@@ -24,6 +24,8 @@ export class NewsComponent implements OnInit {
   async ngOnInit() {
     await this.lastFrameworkNews()
   }
+
+  //marcaA: MarcaAnalyticsModel = {};
 
   async getNews(page: number, frameWork: string) {
     try {
@@ -77,7 +79,7 @@ export class NewsComponent implements OnInit {
     await this.storage.set('stateFrameWork', 'vuejs')
   }
 
-  async markAsFavorite(news: any) {
+  async markAsFavorite(news: NewsModel) {
     let favorites = await this.storage.get('favorites') 
     if (!favorites) {
       favorites = []
@@ -107,7 +109,7 @@ export class NewsComponent implements OnInit {
     }
     read = JSON.parse(read)
     if (read.find(element => element.objectID === news.objectID)) {
-      //delete if it is already in read
+      //delete if it is already read
       read.splice(read.indexOf(news), 1)
     }else{
       read.push(news)
@@ -123,7 +125,7 @@ export class NewsComponent implements OnInit {
     let myNews = news
     if (favorites) {
       favorites = JSON.parse(favorites)
-      //if they shared id set isFavorite to true or false
+      //if they shared objectID set isFavorite to true or false
       myNews = myNews.map(element => {
         element.isFavorite = favorites.find(favorite => favorite.objectID === element.objectID) ? true : false
         return element
@@ -137,7 +139,7 @@ export class NewsComponent implements OnInit {
     let myNews = this.allNews
     if (read) {
       read = JSON.parse(read)
-      //if they shared id set isFavorite to true or false
+      //if they shared objectID set isFavorite to true or false
       myNews = myNews.map(element => {
         element.isRead = read.find(read => read.objectID === element.objectID) ? true : false
         return element
@@ -146,7 +148,7 @@ export class NewsComponent implements OnInit {
     this.allNews = myNews
   }
 
-  goToUrl(news: any) {
+  goToUrl(news: NewsModel) {
     this.markAsRead(news)
     window.open(news.story_url, '_blank')
   }

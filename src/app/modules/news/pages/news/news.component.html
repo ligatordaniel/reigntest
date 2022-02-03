@@ -8,6 +8,7 @@
 
   <app-options-buttons></app-options-buttons>
 
+  <!-------------Type of new DropDown ---------------->
   <div class="dropDownPosition">
     <div class="dropdown">
       <button class="dropbtn">
@@ -35,10 +36,13 @@
     </div>
   </div>
 
+
+  <!-------------loading full-size Spinner ---------------->
   <div *ngIf="loading" class="spinner-border text-info loadingStyle" style="width: 4rem; height: 4rem;" role="status">
     <span class="visually-hidden">Loading...</span>
   </div>
 
+  <!-------------------List of NEWS -------------------->
   <div class="grid-responsive" *ngIf="allNews">
     <div class="gridBox" *ngFor="let news of allNews">
       <div class="sub-grid">
@@ -67,7 +71,7 @@
 
   </div>
 
-
+    <!-------------infinite Scroll Spinner ---------------->
   <div *ngIf="scrollLoading" class="spinner-border text-info littleSpinner" role="status">
     <span class="visually-hidden">Loading...</span>
   </div>
