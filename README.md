@@ -1,6 +1,8 @@
 # ReignDanielUlloa
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 8.3.29.
+This project was generated to apply as a frontend developer position
+author: Daniel Ulloa Vásquez
+email: danielulloa256@gmail.com
 
 ## Development server
 
@@ -8,18 +10,18 @@ This project was generated with [Angular CLI](https://github.com/angular/angular
   git clone https://github.com/ligatordaniel/reigntest.git
 ```
 
-install node and nvm using 16.13.2 
+Install node and nvm using 16.13.2 
 ```sh
   nvm install 16.13.2 
   nvm use 16.13.2
 ```
 
-install angular cli
+Install angular cli
 ```sh
   npm install -g angular-cli
 ```
 
-install node dependencies
+Install node dependencies
 
 ```sh
   cd reign-daniel-ulloa
